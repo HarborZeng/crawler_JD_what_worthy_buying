@@ -6,7 +6,7 @@ import pymysql as pymysql
 from generate_wordcloud import draw_wordcloud
 
 
-def read_data():
+def read_data(skuid):
     datas = []
     # 获取数据库链接
     connection = pymysql.connect(host="localhost", user="root", passwd="123123", db="jd", port=3306,
@@ -15,10 +15,10 @@ def read_data():
         # 获取会话指针
         with connection.cursor() as cursor:
             # 创建sql语句
-            sql = "select * from `jd_items` where jd.jd_items.skuid='7029545'"
+            sql = "select * from `jd_items` where jd.jd_items.skuid=%s"
 
             # 执行sql语句
-            cursor.execute(sql)
+            cursor.execute(sql, skuid)
             datas = cursor.fetchall()
 
             # 提交数据库
@@ -28,12 +28,12 @@ def read_data():
     return datas
 
 
-def process():
+def process(skuid):
     sum_sentiment = 0
     good_counter = 0
     just_so_so_counter = 0
     bad_counter = 0
-    datas = read_data()
+    datas = read_data(skuid)
 
     comments_concat = ""
     for data in datas:
@@ -58,4 +58,4 @@ def process():
     draw_wordcloud(comments_concat)
 
 
-process()
+process(7029545)
