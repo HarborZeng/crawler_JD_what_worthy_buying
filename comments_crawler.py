@@ -24,19 +24,7 @@ def crawlProductComment(url, skuid):
         product_name = comment['referenceName']
         comment_time = comment['creationTime']
         content = comment['content']
-
-        # # 输出商品评论关键信息
-        # if comment == 0:
-        #     print("商品全名:{}".format(product_name))
-        #
-        # print("时间:{}".format(comment_time))
-        # print("内容:{}".format(content))
-        # print("-----------------------------")
-
-        '''
-        数据库操作
-        '''
-
+        # 数据库操作
         # 获取数据库链接
         connection = pymysql.connect(host="localhost", user="root", passwd="123123", db="jd", port=3306, charset="utf8")
         try:
@@ -86,3 +74,4 @@ def crawl_main(skuid):
             retry_times = 6
             print("\r", "{}th page has been saved.".format(i), end='', flush=True)
 
+crawl_main(5001209)
