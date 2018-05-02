@@ -7,7 +7,6 @@ from generate_wordcloud import draw_wordcloud
 
 
 def read_data(skuid):
-    datas = []
     # 获取数据库链接
     connection = pymysql.connect(host="localhost", user="root", passwd="123123", db="jd", port=3306,
                                  charset="utf8")
@@ -15,7 +14,7 @@ def read_data(skuid):
         # 获取会话指针
         with connection.cursor() as cursor:
             # 创建sql语句
-            sql = "select * from `jd_items` where jd.jd_items.skuid=%s"
+            sql = "select * from jd.jd_items where jd.jd_items.skuid=%s"
 
             # 执行sql语句
             cursor.execute(sql, skuid)

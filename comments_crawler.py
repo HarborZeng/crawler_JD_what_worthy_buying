@@ -31,8 +31,7 @@ def crawlProductComment(url, skuid):
             # 获取会话指针
             with connection.cursor() as cursor:
                 # 创建sql语句
-                sql = "insert into `jd_items` (`skuid`, `productName`,`commentTime`,`content`) values (%s,%s,%s,%s)"
-
+                sql = "insert into jd.jd_items (`skuid`, `productName`,`commentTime`,`content`) values (%s,%s,%s,%s)"
                 # 执行sql语句
                 cursor.execute(sql, (skuid, product_name, comment_time, content))
 
@@ -73,5 +72,6 @@ def crawl_main(skuid):
         else:
             retry_times = 6
             print("\r", "{}th page has been saved.".format(i), end='', flush=True)
+
 
 crawl_main(5001209)

@@ -1,8 +1,5 @@
 import urllib.request
 import json
-import time
-import random
-import pymysql as pymysql
 
 
 def get_product_price(skuid, url="https://p.3.cn/prices/mgets?skuIds="):

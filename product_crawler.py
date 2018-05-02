@@ -1,10 +1,8 @@
 # 引入相关模块
 import time
-import urllib.request
 
 import requests
 from bs4 import BeautifulSoup
-import json
 
 import pymysql as pymysql
 
@@ -29,7 +27,6 @@ def get_cellphones_list(page):
         skuid = li_tags.get("data-sku")
         link = a_tags.get("href")
         url = "https://item.jd.com/" + str(skuid) + ".html"
-        html = ''
         try:
             html = requests.get(url, headers=header).text
         except:
@@ -65,7 +62,7 @@ def get_cellphone_list_whole_jd():
                 # 获取会话指针
                 with connection.cursor() as cursor:
                     # 创建sql语句
-                    sql = "insert into `jd_product` (`skuid`, `product_name`,`link`) values (%s,%s,%s)"
+                    sql = "insert into jd.jd_product (`skuid`, `product_name`,`link`) values (%s,%s,%s)"
 
                     # 执行sql语句
                     cursor.execute(sql, (p["skuid"], p["product_name"], p["link"]))
@@ -87,7 +84,7 @@ def get_cellphone_list_from_db():
         # 获取会话指针
         with connection.cursor() as cursor:
             # 创建sql语句
-            sql = "select * from jd_product"
+            sql = "select * from jd.jd_product"
 
             # 执行sql语句
             cursor.execute(sql)

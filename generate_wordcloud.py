@@ -12,7 +12,7 @@ def draw_wordcloud(text):
     wordcloud = WordCloud(font_path=font_path,
                           width=weight,
                           height=height,
-                          mask=bg_img, stopwords=set("&hellip")).generate(text)
+                          mask=bg_img).generate(text)
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis("off")
     plt.show()
